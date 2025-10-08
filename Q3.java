@@ -15,7 +15,7 @@ public class Q3 {
         }
 
         for (int i = 1; i <= n; i++) {
-            System.out.print(i + " ");
+            System.out.print(i + " ") ;
         }
     }
 }
