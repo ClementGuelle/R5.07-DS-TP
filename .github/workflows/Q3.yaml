@@ -1,0 +1,27 @@
+name: Q3
+run-name: ${{ github.actor }} 
+
+on: [push]
+
+permissions:
+  contents: write
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Ajout du nom dans le fichier
+        run: |
+          echo "GUELLE Clément" > Q3_archive_java.txt
+      - name: Copie du fichier Q3.java dans Q3_archive_java.txt
+        run: |
+          cat Q3.java >> Q3_archive_java.txt
+      - name: Commmit et push
+        run: |
+          git config --global user.name ClementGuelle
+          git config --global user.email clement.guelle@etu.univ-lehavre.fr
+          git add Q3_archive_java.txt
+          git commit -m "Archive du fichier Q3.java"
+          git push
