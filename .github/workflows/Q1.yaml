@@ -10,6 +10,8 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
       - name: Copie du fichier TOTO.txt dans Q1_archive_TOTO.txt
         run: |
           cat TOTO.txt >> Q1_archive_TOTO.txt
