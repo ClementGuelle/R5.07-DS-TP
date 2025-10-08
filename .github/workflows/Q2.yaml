@@ -32,7 +32,7 @@ jobs:
           cat TOTO.txt >> Q2_archive_TOTO.txt
       - name: Ajout de la taille du fichier
         run: |
-          ls -lh TOTO.txt >> Q2_archive_TOTO.txt
+          echo "Taille de TOTO.txt: $(wc -c < TOTO.txt) octets" >> Q2_archive_TOTO.txt
       - name: Commmit et push
         run: |
           git config --global user.name ClementGuelle
