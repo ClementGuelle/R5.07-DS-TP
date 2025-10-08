@@ -1,7 +1,14 @@
 name: Q2
 run-name: ${{ github.actor }} 
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "TOTO.txt"
+      - ".github/workflows/Q2.yaml"
+  workflow_dispatch:
 
 permissions:
   contents: write
