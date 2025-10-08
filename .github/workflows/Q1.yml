@@ -1,1 +1,20 @@
+name: Q1
+run-name: ${{ github.actor }} 
 
+on: [push]
+
+permissions:
+  contents: write
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copie du fichier TOTO.txt dans Q1_archive_TOTO.txt
+        run: |
+          TOTO.txt > Q1_archive_TOTO.txt
+      - name: Commmit et push
+        run: |
+          git add Q1_archive_TOTO.txt
+          git commit -m "Archive du fichier TOTO.txt"
+          git push
