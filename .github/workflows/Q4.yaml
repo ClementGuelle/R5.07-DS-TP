@@ -1,0 +1,32 @@
+name: Q4
+run-name: ${{ github.actor }} 
+
+on: [push]
+
+permissions:
+  contents: write
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Ajout du nom dans le fichier
+        run: |
+          echo "GUELLE Clément" > Q4_archive_date.txt
+      - name: Ajout de la date d execution
+        run: |
+          DATE=$(date +"%d-%m-%Y")
+          echo "DATE=$DATE" >> $GITHUB_ENV
+          date >> Q4_archive_date.txt
+      - name: Copie du fichier Q4.java dans Q4_archive_date.txt
+        run: |
+          cat Q4.java >> Q4_archive_date.txt
+      - name: Commmit et push
+        run: |
+          git config --global user.name ClementGuelle
+          git config --global user.email clement.guelle@etu.univ-lehavre.fr
+          git add Q4_archive_date_${DATE}.txt
+          git commit -m "Archive du fichier Q4.java"
+          git push
