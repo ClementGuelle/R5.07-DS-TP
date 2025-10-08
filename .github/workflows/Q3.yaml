@@ -1,7 +1,13 @@
 name: Q3
 run-name: ${{ github.actor }} 
-
-on: [push]
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Q3.java"
+      - ".github/workflows/Q3.yaml"
+  workflow_dispatch:
 
 permissions:
   contents: write
