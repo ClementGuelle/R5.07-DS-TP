@@ -1,0 +1,47 @@
+name: Q5
+run-name: ${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Q5.java"
+      - ".github/workflows/Q5.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Création de la variable DATE
+        run: |
+          DATE=$(date +"%d-%m-%Y")
+          echo "DATE=$DATE" >> $GITHUB_ENV
+
+      - name: Ajout du nom et prénom dans le fichier
+        run: |
+          echo "GUELLE Clément" > Q5_archive_${DATE}.txt
+          echo "" >> Q5_archive_${DATE}.txt
+          echo "Contenu de Q5.java:" >> Q5_archive_${DATE}.txt
+
+      - name: Copie du fichier Q5.java dans l'archive
+        run: |
+          cat Q5.java >> Q5_archive_${DATE}.txt
+
+      - name: Commit et push
+        run: |
+          git config --global user.name ClementGuelle
+          git config --global user.email clement.guelle@etu.univ-lehavre.fr
+          git add Q5_archive_${DATE}.txt
+          git diff --staged --quiet || git commit -m "Q5: Archive Q5.java avec date"
+          git pull --rebase origin main
+          git push
