@@ -1,0 +1,59 @@
+name: Q6
+run-name: ${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Q6.java"
+      - ".github/workflows/Q6.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Création de l'archive avec date et stats
+        run: |
+          DATETIME=$(date '+%d-%m-%Y-%H%M%S')
+          FILENAME="Q6_archive_${DATETIME}.txt"
+
+          echo "GUELLE Clément" > ${FILENAME}
+          echo "" >> ${FILENAME}
+          echo "Contenu de Q6.java:" >> ${FILENAME}
+          cat Q6.java >> ${FILENAME}
+          echo "" >> ${FILENAME}
+          echo "Statistiques de Q6.java:" >> ${FILENAME}
+          echo "Nombre de caractères: $(wc -c < Q6.java)" >> ${FILENAME}
+          echo "Nombre de lignes: $(wc -l < Q6.java)" >> ${FILENAME}
+
+      - name: Création du fichier de différences
+        run: |
+          FILES=$(ls -t Q6_archive_*.txt 2>/dev/null | head -n 2)
+          COUNT=$(echo "$FILES" | wc -l)
+
+          if [ "$COUNT" -ge 2 ]; then
+            LAST=$(echo "$FILES" | sed -n '1p')
+            PREVIOUS=$(echo "$FILES" | sed -n '2p')
+            
+            echo "Différences entre $PREVIOUS et $LAST:" > Q6_différences.txt
+            echo "" >> Q6_différences.txt
+            diff "$PREVIOUS" "$LAST" >> Q6_différences.txt || true
+          else
+            echo "Pas assez de fichiers Q6_archive pour comparer" > Q6_différences.txt
+          fi
+
+      - name: Commit et push
+        run: |
+          git config --global user.name ClementGuelle
+          git config --global user.email clement.guelle@etu.univ-lehavre.fr
+          git add Q6_archive_*.txt Q6_différences.txt
+          git commit -m "Archive de Q6.java avec date, stats et différences" || echo "Rien à committer"
+          git push
