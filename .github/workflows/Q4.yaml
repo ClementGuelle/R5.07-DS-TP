@@ -14,15 +14,15 @@ jobs:
         uses: actions/checkout@v4
       - name: Ajout du nom dans le fichier
         run: |
-          echo "GUELLE Clément" > Q4_archive_date.txt
+          echo "GUELLE Clément" > Q4_archive_date_${DATE}.txt
       - name: Ajout de la date d execution
         run: |
           DATE=$(date +"%d-%m-%Y")
           echo "DATE=$DATE" >> $GITHUB_ENV
-          date >> Q4_archive_date.txt
-      - name: Copie du fichier Q4.java dans Q4_archive_date.txt
+          date >> Q4_archive_date_${DATE}.txt
+      - name: Copie du fichier Q4.java dans Q4_archive_date_${DATE}.txt
         run: |
-          cat Q4.java >> Q4_archive_date.txt
+          cat Q4.java >> Q4_archive_date_${DATE}.txt
       - name: Commmit et push
         run: |
           git config --global user.name ClementGuelle
