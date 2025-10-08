@@ -1,0 +1,31 @@
+GUELLE Clément
+
+Contenu de Q6.java:
+public class Q {
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println("Il 'y a pas de paramètre.");
+            return;
+        }
+
+        int n = 0;
+      
+        try {
+            n = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            System.out.println("Le paramètre doit être un chiffre entier");
+            return;
+        }
+
+        for (int i = n; i >= 1; i--) {          
+          for (int j = 1; j <= i; j++) {
+              System.out.print("X ");
+          }
+          System.out.println();
+      }
+    }
+}
+
+Statistiques de Q6.java:
+Nombre de caractères: 611
+Nombre de lignes: 24
