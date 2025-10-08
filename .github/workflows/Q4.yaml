@@ -36,4 +36,4 @@ jobs:
           git config --global user.email clement.guelle@etu.univ-lehavre.fr
           git add Q4_archive_date_${DATE}.txt
           git commit -m "Archive du fichier Q4.java"
-          git push
+          git push 
