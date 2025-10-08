@@ -1,3 +1,7 @@
 GUELLE Clément
 toto
 -lh TOTO.txt
+GUELLE Clément
+Wed Oct  8 14:10:39 UTC 2025
+toto
+-rw-r--r-- 1 runner runner 5 Oct  8 14:10 TOTO.txt
